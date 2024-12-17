@@ -1,3 +1,9 @@
+# First:
+
+```
+npm i
+``
+
 # json Server
 
 do: 
@@ -8,8 +14,7 @@ npx json-server -p 3500 -w data/dbrgb.json
 This will start the server where you can them fetch the data from colors and get the functionality of the app working
 
 Nothing else needed. 
-Just npm i 
-them, npm start 
+npm start 
 and try it out in your browser
 
 
