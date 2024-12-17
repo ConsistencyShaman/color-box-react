@@ -1,8 +1,8 @@
-# First:
+# Firts things firts
 
 ```
 npm i
-``
+```
 
 # json Server
 
@@ -16,7 +16,6 @@ This will start the server where you can them fetch the data from colors and get
 Nothing else needed. 
 npm start 
 and try it out in your browser
-
 
 # Getting Started with Create React App
 
