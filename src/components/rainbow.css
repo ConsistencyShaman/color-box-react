@@ -1,0 +1,39 @@
+
+
+.emojiRainbow {
+    margin-top: 0;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    color:black;
+    
+    background: linear-gradient(45deg, 
+    rgb(65, 0, 0), 
+    red, orange, rgb(43, 255, 0), 
+    rgb(0, 189, 202), blue, indigo, 
+    violet, rgb(255, 0, 76), 
+    rgb(87, 0, 0));
+
+    background-size: 400% 400%;
+    
+    -webkit-background-clip: text; /* Clip the background to text */
+    background-clip: text;
+    transition: all 0.3s ease;
+  }
+  
+  .emojiRainbow.clicked {
+    color:white;
+    animation: emojiRainbow 1.5s linear infinite;
+  }
+  
+  @keyframes emojiRainbow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }

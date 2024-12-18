@@ -1,6 +1,6 @@
-import { useState } from "react";
+import './rainbow.css'
 
-export function Emoji() {
+export function Emoji({ rainbowOn, handleRainbow }) {
     const ASCII = () => {
         return `
         *^^*
@@ -17,7 +17,7 @@ export function Emoji() {
 
     return (
         <div >
-            <pre>{ASCII()}</pre>
+            <pre className={`emojiRainbow ${rainbowOn ? 'clicked' : ''}`} onClick={handleRainbow}>{ASCII()}</pre>
         </div>
     )
 }

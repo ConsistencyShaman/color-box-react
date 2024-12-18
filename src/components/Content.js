@@ -3,8 +3,9 @@ import { Input } from "./Input";
 import { Emoji } from "./Emoji";
 
 export function Content({
-    colorName, rgbValue, hexValue,
-    handleChange, popupList, handleSelectedColor, active
+    colorName, rgbValue, hexValue, hexColor,
+    handleChange, popupList, handleSelectedColor, active,
+    rainbowOn, handleRainbow
 }) {
     return (
         <>
@@ -12,6 +13,7 @@ export function Content({
                 colorName={colorName}
                 rgbValue={rgbValue}
                 hexValue={hexValue}
+                hexColor={hexColor}
             />
             <Input
                 colorName={colorName}
@@ -21,7 +23,10 @@ export function Content({
                 active={active}
             />
 
-            <Emoji />
+            <Emoji 
+                rainbowOn={rainbowOn} 
+                handleRainbow={handleRainbow} 
+            />
         </>
     )
 }

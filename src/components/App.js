@@ -4,8 +4,8 @@ import { Footer } from "./Footer";
 
 import { useEffect, useState } from "react";
 
-import { rgbToHex, rgbValues } from "../utils/func";
-import { apiRequest } from "../utils/apiRequest";
+import { rgbToHex, rgbValues, colorTone } from "../utils/func";
+
 
 
 export function App() {
@@ -19,11 +19,15 @@ export function App() {
   // set the state of the pop up colors list
   const [popupList, setPopupList] = useState([]);
   const [active, setActive] = useState(false);
-  const [colorName, setcolorName] = useState('');
+  const [colorName, setColorName] = useState('');
 
 
   const [rgbValue, setRgbValue] = useState('');
   const [hexValue, setHexValue] = useState('');
+  const [hexColor, setHexColor] = useState('');
+
+  // rainbow...
+  const [rainbowOn, setRainbowOn] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -45,7 +49,7 @@ export function App() {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    setcolorName(value);
+    setColorName(value);
 
     if (value === '') {
       setActive(false);
@@ -55,30 +59,54 @@ export function App() {
 
     } else {
       const filteredColors = colorsList.filter(color =>
-        ((color.name).toLowerCase()).includes(value.toLowerCase()));
+        (color.name.toLowerCase()).includes(value.toLowerCase()));
 
       setPopupList(filteredColors);
       setActive(true);
+
+      if (filteredColors.length === 1 && 
+        value.toLowerCase() === filteredColors[0].name.toLowerCase()) {
+        
+        setActive(false);
+        setPopupList([]);
+
+        setTimeout(() => {
+          // Hex value and text color
+          setHexValue(rgbToHex(filteredColors[0].rgb));
+          setHexColor(colorTone(filteredColors[0].rgb) < 100 ? 'white' : 'black');
+          // rgb value
+          setRgbValue(filteredColors[0].rgb);
+        }, 250);
+
+      }
     }
   }
 
   const handleSelectedColor = (color) => {
-    setcolorName(color.name);
+    setColorName(color.name);
     // Clear pop up list state & hide list
     setActive(false);
     setPopupList([]);
 
-    // Show RGB values
-    setRgbValue(color.rgb);
-    // Convert to hex value
+    // Show color values, rgb and hex
     setTimeout(() => {
       setHexValue(rgbToHex(color.rgb));
+      // Define hex value text color
+      setHexColor(colorTone(color.rgb) < 100 ? 'white' : 'black');
+      // rgb values
       setRgbValue(rgbValues(color.rgb));
     }, 250);
 
   }
 
-
+  const handleRainbow = () => {
+    setRainbowOn(true);
+    //console.log('rainbow on');
+    setTimeout(() => {
+      setRainbowOn(false);
+      //console.log('rainbow off');
+    }, 5000);
+  }
 
   return (
     <div className="App">
@@ -91,10 +119,14 @@ export function App() {
             colorName={colorName}
             rgbValue={rgbValue}
             hexValue={hexValue}
+            hexColor={hexColor}
             handleChange={handleChange}
             popupList={popupList}
             handleSelectedColor={handleSelectedColor}
             active={active}
+
+            rainbowOn={rainbowOn}
+            handleRainbow={handleRainbow}
           />
         }
       </main>
