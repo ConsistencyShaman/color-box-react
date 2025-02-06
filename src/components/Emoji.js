@@ -1,4 +1,4 @@
-import './rainbow.css'
+import './emoji.css'
 
 export function Emoji({ rainbowOn, handleRainbow }) {
     const ASCII = () => {

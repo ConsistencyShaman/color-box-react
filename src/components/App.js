@@ -9,7 +9,7 @@ import { rgbToHex, rgbValues, colorTone } from "../utils/func";
 
 
 export function App() {
-  const COLORS_URL = 'http://localhost:3500/rgbColors';
+  const COLORS_URL = '/dbrgb.json';
   const [fetchErr, setFetchErr] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -26,7 +26,7 @@ export function App() {
   const [hexValue, setHexValue] = useState('');
   const [hexColor, setHexColor] = useState('');
 
-  // rainbow...
+  // emoji effect...
   const [rainbowOn, setRainbowOn] = useState(false);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export function App() {
           const response = await fetch(COLORS_URL);
           if (!response.ok) throw Error('Error with fetch operation');
           const res = await response.json();
-          setColorsList(res);
+          setColorsList(res.rgbColors);
           setFetchErr(null);
         } catch (err) {
           setFetchErr(err.message);
